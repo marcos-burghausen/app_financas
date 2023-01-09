@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DespesasController;
+use App\Http\Controllers\ReceitasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,10 +19,13 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/receitas', function () {
-    return view('receitas');
-});
+// Route::get('/despesas/adicionar', function () {
+//     return view('despesas.despesa');
+// });
 
-Route::controller(HomeController::class)->group(function() {
-    Route::get('/home', 'home')->name('home');
+Route::get('/receitas', [ReceitasControllerController::class, 'listarReceitas']);
+
+Route::controller(DespesasController::class)->group(function() {
+    Route::get('/despesas', 'listarDespesas')->name('despesas');
+    Route::get('/despesas/adicionar', 'adicionarDespesa')->name('adicionarDespesa');
 });
